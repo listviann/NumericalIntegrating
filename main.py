@@ -8,8 +8,7 @@ def get_function(x):
 
 
 def get_true_integral(func, upper, lower, _integral):
-    print(upper)
-    print(f"\n{func}dx = {_integral[0]}\n\n{lower}")
+    print(f"{upper}\n\n{func}dx = {_integral[0]}\n\n{lower}")
 
 
 def use_rectangle_formula(func, lower, upper, _n, _h):
@@ -30,7 +29,7 @@ def check_M2(_x, func, lower):
 
 
 def check_R(m2, _h, lower, upper):
-    r = m2 * (((h ** 2) * (upper - lower)) / 24)
+    r = m2 * (((_h ** 2) * (upper - lower)) / 24)
     return r
 
 
@@ -39,23 +38,27 @@ def compare_integrals_results(true_result, rect_result):
     return comparison_result
 
 
-initial_function = 1 / ((x ** 2 + 1)**0.5)
-n = 10
-h = 0.2
-upper_limit = 1.3
-lower_limit = -0.5
+def start():
+    initial_function = 1 / ((x ** 2 + 1) ** 0.5)
+    n = 10
+    h = 0.2
+    upper_limit = 1.3
+    lower_limit = -0.5
 
-true_integral = integrate.quad(get_function, lower_limit, upper_limit)
-rectangle_integral = use_rectangle_formula(initial_function, lower_limit, upper_limit, n, h)
-m_2 = check_M2(x, initial_function, lower_limit)
-_r = check_R(m_2, h, lower_limit, upper_limit)
-comparison = compare_integrals_results(true_integral[0], rectangle_integral)
+    true_integral = integrate.quad(get_function, lower_limit, upper_limit)
+    rectangle_integral = use_rectangle_formula(initial_function, lower_limit, upper_limit, n, h)
+    m_2 = check_M2(x, initial_function, lower_limit)
+    _r = check_R(m_2, h, lower_limit, upper_limit)
+    comparison = compare_integrals_results(true_integral[0], rectangle_integral)
 
-get_true_integral(initial_function, upper_limit, lower_limit, true_integral)
-print(f"Квадратурная формула прямоугольников: {rectangle_integral}")
-print(f"M2 = sup |f''(x)| = |f''({lower_limit})| = ", m_2)
-print(f"R <= M2 * ((h^2 * (b - a)) / 24) = {_r}")
-print(f"Сравнение точного значения интеграла и полученного |{true_integral[0]} - {rectangle_integral}| "
-      f"= {comparison}")
+    get_true_integral(initial_function, upper_limit, lower_limit, true_integral)
+    print(f"Квадратурная формула прямоугольников: {rectangle_integral}")
+    print(f"M2 = sup |f''(x)| = |f''({lower_limit})| = ", m_2)
+    print(f"R <= M2 * ((h^2 * (b - a)) / 24) = {_r}")
+    print(f"Сравнение точного значения интеграла и полученного |{true_integral[0]} - {rectangle_integral}| "
+          f"= {comparison}")
+
+
+start()
 
 
